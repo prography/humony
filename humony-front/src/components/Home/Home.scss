@@ -1,0 +1,181 @@
+@import 'utils';
+
+#home {
+    background: linear-gradient(rgba(#000, 0.6), rgba(#000, 0.6)), url('../../assets/images/bg5.jpg') center;
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    
+
+    .home-wrap {
+        width: 100%;
+        padding: 0 80px;
+    }
+
+    .uploadBox {
+        width: 42%;
+        height: 500px;
+        border-radius: 10px;
+        background: rgba(#fff, .7);
+        box-shadow: $box-shadow-5;
+        padding: 30px;
+        float: left;
+
+        h2 {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #aaa;
+            margin-bottom: 30px;
+        }
+
+        .filebox { 
+            display: inline-block; 
+            label {
+                padding: .5em .75em; 
+                font-size: inherit; 
+                line-height: normal; 
+                vertical-align: middle; 
+                background: $main-color;
+                cursor: pointer; 
+                border-radius: .25em;
+                color: #fff;
+                &:hover {
+                    background: darken($main-color, 5%);
+                }
+            }
+        }
+
+        .filebox input[type="file"] {
+            position: absolute; 
+            width: 1px; 
+            height: 1px; 
+            padding: 0; 
+            margin: -1px; 
+            overflow: hidden; 
+            clip:rect(0,0,0,0); 
+            border: 0; 
+        }
+
+        .fileName {
+            color: #fff;
+        }
+    }
+
+    .titleInfo {
+        width: 58%;
+        padding-top: 60px;
+        padding-left: 60px;
+        float: left;
+        
+        h3 {
+            span.title-concept {
+                color: #fff;
+                font-size: 3rem;
+            }
+            color: #fff;
+            font-size: 3rem;
+            padding-bottom: 30px;
+        }
+        .startBtn {
+            border: none;
+            border-radius: 30px;
+            padding: 10px 50px;
+            font-size: .9rem;
+            font-weight: bold;
+            background: #fff;
+            color: #333;
+
+            span {
+                color: $main-color;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1028px) {
+    #home {
+        display: block;
+        padding-top: 100px;
+
+        .home-wrap {
+            padding: 0 20px;
+        }
+        .uploadBox {
+            width: 100%;
+            height: 400px;
+            padding: 30px;
+            float: left;
+        }
+    
+        .titleInfo {
+            width: 100%;
+            padding: 40px 20px;
+            float: left;
+            
+            h3 {
+                span.title-concept {
+                    font-size: 3rem;
+                }
+                font-size: 2.5rem;
+                padding: 0 0 30px;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    #home {
+        .uploadBox {
+            float: none;
+        }
+        
+        .titleInfo {
+            float:none;
+            h3 {
+                text-align: center;
+                span.title-concept {
+                    font-size: 2.5rem;
+                }
+                font-size: 2rem;
+                padding: 0 0 30px;
+            }
+            .startBtn {
+                display: block;
+                width: 261px;
+                height: 42px;
+                margin: 0 auto;
+                background: #fff;
+                color: #333;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #home {
+        .uploadBox {
+            padding: 20px;
+            height: 200px;
+            h2 {
+                margin-bottom: 20px;
+            }
+            .filebox { 
+                label {
+                    font-size: .8rem;   
+                }
+            }
+        }
+        .titleInfo {
+            padding: 20px 5px;
+            h3 {
+                span.title-concept {
+                    font-size: 1.5rem;
+                }
+                font-size: 1.2rem;
+                padding: 0 0 30px;
+            }
+        }
+    }
+}
