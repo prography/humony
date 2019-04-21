@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
-from config.settings import development
+from .settings import MEDIA_ROOT, MEDIA_URL, DEBUG
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('picxi.urls')),
     # path('account/', include('account.urls')),
 ]
-urlpatterns += static(development.MEDIA_URL, document_root=development.MEDIA_ROOT)
+if DEBUG is True:
+    urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
