@@ -4,22 +4,17 @@ import pymysql
 pymysql.install_as_MySQLdb()
 
 
-DEBUG = True
+DEBUG = False
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # APPEND_SLASH=False
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
-
-
 
 if DEBUG is True:
     SECRET_KEY = "buq*!eias((abkx11b6ab964cs7-at1gw%k^!oypi^1357f6@"
     ALLOWED_HOSTS = [
         "127.0.0.1", "*",
     ]
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -167,3 +162,6 @@ STATIC_URL = '/static/'
 # REST_AUTH_SERIALIZERS = {
 #     'USER_DETAILS_SERIALIZER': 'user.serializers.UserDetailsSerializer',
 # }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

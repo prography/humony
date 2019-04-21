@@ -22,5 +22,4 @@ urlpatterns = [
     path('api/', include('picxi.urls')),
     # path('account/', include('account.urls')),
 ]
-if DEBUG is True:
-    urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
+urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)

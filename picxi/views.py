@@ -15,7 +15,7 @@ class InPicList(generics.ListCreateAPIView):
    # permission_classes = (IsAuthenticated,)
     queryset = InPic.objects.all()
     serializer_class = InPicSerializer
-
+    print("123")
 
 class InPicDetail(generics.RetrieveUpdateDestroyAPIView):
     #authentication_classes = (SessionAuthentication, BasicAuthentication)
