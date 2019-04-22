@@ -2,10 +2,11 @@
 *~
 __pycache__
 /venv
-env.json
+db.sqlite3
+.DS_Store
 .idea
+env.json
 /media
 /migrations
 /dataset/*
 /model
-db.sqlite3
