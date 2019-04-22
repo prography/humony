@@ -4,7 +4,7 @@ import pymysql
 pymysql.install_as_MySQLdb()
 
 
-DEBUG = False
+DEBUG = True
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # APPEND_SLASH=False
 CORS_ORIGIN_ALLOW_ALL = True
@@ -163,5 +163,5 @@ STATIC_URL = '/static/'
 #     'USER_DETAILS_SERIALIZER': 'user.serializers.UserDetailsSerializer',
 # }
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/dataset/'
+MEDIA_ROOT = os.path.dirname(os.path.join(BASE_DIR, 'dataset'))
