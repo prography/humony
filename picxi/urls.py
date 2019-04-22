@@ -17,7 +17,8 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('inpic/', views.InPicList.as_view()),
+    path('inpic/', views.InPicCreate),
+    path('inpicq/', views.InPicList.as_view()),
     path('inpic/<str:pk>/', views.InPicDetail.as_view()),
     path('outpic/', views.OutPicList.as_view()),
     path('outpic/<str:pk>/', views.OutPicDetail.as_view()),

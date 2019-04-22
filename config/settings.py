@@ -10,16 +10,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
 
-
-
 if DEBUG is True:
     SECRET_KEY = "buq*!eias((abkx11b6ab964cs7-at1gw%k^!oypi^1357f6@"
     ALLOWED_HOSTS = [
         "127.0.0.1", "*",
     ]
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -167,3 +162,6 @@ STATIC_URL = '/static/'
 # REST_AUTH_SERIALIZERS = {
 #     'USER_DETAILS_SERIALIZER': 'user.serializers.UserDetailsSerializer',
 # }
+
+MEDIA_URL = '/dataset/'
+MEDIA_ROOT = os.path.dirname(os.path.join(BASE_DIR, 'dataset'))
