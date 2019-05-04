@@ -6,8 +6,8 @@ from rest_framework.reverse import reverse
 #from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 #from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from .models import InPic, OutPic
-from .serializers import InPicSerializer, OutPicSerializer
+from .models import InPic, OutPic, SegPic
+from .serializers import InPicSerializer, OutPicSerializer, SegPicSerializer
 from deep.humony_inference_url import *
 # from config.settings import MEDIA_URL
 
@@ -19,10 +19,15 @@ def InPicCreate(request):
         Image = iserializer.data.get('before')
         id = iserializer.data.get('guidmodel_ptr_id')
         cutimage = humony("{0}{1}".format('http://127.0.0.1:8000', Image))
-        # print(cutimage+"이거다"+id)
-        OutPic(after=cutimage, origin_id_id=id).save()
-        return Response(iserializer.data, status=status.HTTP_201_CREATED)
-    return Response(iserializer.error)
+
+
+        SegPic(ing=cutimage[2:], origin_id_id=id).save()
+        print("\n" + cutimage[2:] + "이거다 \n")
+        segserializer = SegPicSerializer(data = {'ing':cutimage[2:], 'origin_id':id,})
+        segserializer.is_valid()
+        print(segserializer.data)
+        return Response(segserializer.data, status=201)
+    return Response(iserializer.errors, status=400)
 
 
 class InPicList(generics.ListCreateAPIView):
