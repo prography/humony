@@ -28,9 +28,7 @@ class Header extends Component<Props, State> {
                 <nav>
                     <div className="header-container">
                         <div className="logo">
-                            <h1>
-                                <a href="/">Picxy</a>
-                            </h1>
+                            <Link to="/">PICXY</Link>
                         </div>
                         <ul className={`gnb_list ${this.state.mobileOpen ? 'is_open' : ''}`}>
                             <li><Link to="/">홈</Link></li>
