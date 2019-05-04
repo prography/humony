@@ -1,8 +1,11 @@
 import React from 'react';
+import './Footer.scss';
 
 const Header: React.FC = () => {
     return (
-        <footer></footer>
+        <footer>
+            Copyright&copy; 2019 Picxy All rights reserved.
+        </footer>
     );
 };
 

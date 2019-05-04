@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import './Home.scss';
 import * as api from '../../lib/api';
 import swal from 'sweetalert';
-//import console = require('console');
+import { IoIosCloudUpload as UploadIcon } from 'react-icons/io';
 
 
 interface Props {
@@ -38,7 +38,7 @@ class Home extends Component<Props, State> {
 
     handleUpload = async () => {
         if (!this.state.formData) {
-            swal('파일을 선택해 주세요');
+            swal('파일을 선택해 주세요', '', 'warning');
             return false;
         }
 
@@ -61,26 +61,30 @@ class Home extends Component<Props, State> {
         `;
 
         return (
-            <section id="home">
-                <div className="home-wrap">
-                    <div className="uploadBox">
-                        <h2>파일 업로드</h2>
-                        <form>
-                            <div className="filebox">
-                                <label htmlFor="ex_file">
-                                    파일을 선택해 주세요
-                                </label>
-                                <input type="file" onChange={this.handleChange} id="ex_file" />
+            <div id="home">
+                <section className="main-banner">
+                    <div className="main-content">
+                        <div className="main-container">
+                            <div className="main-title-info">
+                                <h2>사진을 10초만에 자르기<br/>픽시와 함께라면 가능합니다.</h2>
+                                <p>지금 바로 시작해보세요!</p>
                             </div>
-                        </form>
-                        <SendBtn type="button" onClick={this.handleUpload}>전송</SendBtn>
+                            <div className="upload-box">
+                                <div className="ub-bg">
+                                    <label htmlFor="imageInput">
+                                        <figure>
+                                            <UploadIcon className="upload-icon" />
+                                        </figure>
+                                        <span>이미지 파일을 선택해주세요 <br/><span className="ext">JPG, JPGEG, PNG</span></span>
+                                    </label>
+                                    <input type="file" id="imageInput" onChange={this.handleChange} />
+                                    <button type="button" onClick={this.handleUpload}>전송하기</button>
+                                </div>  
+                            </div>
+                        </div>
                     </div>
-                    <div className="titleInfo">
-                        <h3><span className="title-concept">사진을 쉽고 빠르게 자르자!</span> <br/>윤대영쌤의 딥러닝과 함께하는<br/>재미있는 누끼따기</h3>
-                        <button className="startBtn"><span>START</span> 지금 바로 시작하기</button>  
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
         );
     }
 }

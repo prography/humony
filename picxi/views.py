@@ -20,8 +20,7 @@ def InPicCreate(request):
         id = iserializer.data.get('guidmodel_ptr_id')
         cutimage = humony("{0}{1}".format('http://127.0.0.1:8000', Image))
         # print(cutimage+"이거다"+id)
-        q = OutPic(after=cutimage, origin_id_id=id)
-        q.save()
+        OutPic(after=cutimage, origin_id_id=id).save()
         return Response(iserializer.data, status=status.HTTP_201_CREATED)
     return Response(iserializer.error)
 

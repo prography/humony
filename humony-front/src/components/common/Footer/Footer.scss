@@ -1,0 +1,11 @@
+@import 'utils';
+
+footer {
+    width: 100%;
+    height: $footer-height;
+    text-align: center;
+    line-height: $footer-height;
+    font-size: .5rem;
+    color: #666;
+    background: #efefef;
+}
