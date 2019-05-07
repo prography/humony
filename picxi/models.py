@@ -8,7 +8,7 @@ class InPic(GUIDModel):
 
 class SegPic(GUIDModel):
     origin_id = models.ForeignKey(InPic, on_delete=models.CASCADE)
-    ing = models.ImageField(upload_to='dataset/segPic/%Y/%m/%d/', blank=False)
+    ing = models.ImageField(upload_to='dataset/segpic/%Y/%m/%d/', blank=False)
     created = models.DateTimeField(auto_now_add=True)
 
 class OutPic(GUIDModel):
