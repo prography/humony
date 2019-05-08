@@ -18,7 +18,7 @@ def InPicCreate(request):
         iserializer.save()
         Image = iserializer.data.get('before')
         id = iserializer.data.get('guidmodel_ptr_id')
-        cutimage = humony("{0}{1}".format('http://127.0.0.1:8000', Image))
+        cutimage = humony("{0}{1}".format('http://127.0.0.1:8000', Image), 1)
 
 
         SegPic(ing=cutimage[2:], origin_id_id=id).save()

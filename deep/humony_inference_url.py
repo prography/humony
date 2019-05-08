@@ -31,7 +31,7 @@ parser = argparse.ArgumentParser()
 # parser.add_argument('--data_dir', type=str, default='dataset/VOCdevkit/VOC2012/JPEGImages',
 #                     help='The directory containing the image data.')
 
-parser.add_argument('--infer_data_dir', type=str, default='./dataset/inpic/',
+parser.add_argument('--infer_data_dir', type=str, default='./dataset/inpic/'+date,
                     help='Path to the file listing the inferring images.')
 
 parser.add_argument('--segout_dir', type=str, default='./dataset/segpic/'+date,
@@ -63,7 +63,8 @@ _NUM_CLASSES = 21
 
 
 
-def humony(url):
+def humony(url, option):
+
   tf.logging.set_verbosity(tf.logging.INFO)
   FLAGS, unparsed = parser.parse_known_args()
   # Using the Winograd non-fused algorithms provides a small performance boost.
@@ -126,7 +127,10 @@ def humony(url):
       res = Image.fromarray(res)
       res.save(path_to_output)
       print("generating:", path_to_output)
-  return (path_to_mask)
+  if option == 1:
+    return (path_to_mask)
+  elif option == 2:
+    return (path_to_output)
 
 #
 # if __name__ == '__main__':
