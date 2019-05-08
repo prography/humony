@@ -163,5 +163,5 @@ STATIC_URL = '/static/'
 #     'USER_DETAILS_SERIALIZER': 'user.serializers.UserDetailsSerializer',
 # }
 
-MEDIA_URL = '/dataset/'
+MEDIA_URL = '/'
 MEDIA_ROOT = os.path.dirname(os.path.join(BASE_DIR, 'dataset'))

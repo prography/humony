@@ -21,19 +21,23 @@ import urllib.request
 from io import BytesIO
 
 from tensorflow.python import debug as tf_debug
+import datetime
 
+date = datetime.datetime.now()
+date = date.strftime('%Y/%m/%d/')
+# date = str(datetime.datetime.strptime(date, '%Y/%m/%d/'))
 parser = argparse.ArgumentParser()
 
 # parser.add_argument('--data_dir', type=str, default='dataset/VOCdevkit/VOC2012/JPEGImages',
 #                     help='The directory containing the image data.')
 
-parser.add_argument('--infer_data_dir', type=str, default='./dataset/inference',
+parser.add_argument('--infer_data_dir', type=str, default='./dataset/inpic/'+date,
                     help='Path to the file listing the inferring images.')
 
-parser.add_argument('--segout_dir', type=str, default='./dataset/segmentation_output',
+parser.add_argument('--segout_dir', type=str, default='./dataset/segpic/'+date,
                     help='Path to the directory to generate the inference results')
 
-parser.add_argument('--cutout_dir', type=str, default='./dataset/cutting_output',
+parser.add_argument('--cutout_dir', type=str, default='./dataset/outpic/'+date,
                     help='Path to the directory to generate the inference results')
 
 parser.add_argument('--model_dir', type=str, default='./model',
@@ -55,7 +59,12 @@ parser.add_argument('--debug', action='store_true',
 _NUM_CLASSES = 21
 
 
-def humony(url):
+
+
+
+
+def humony(url, option):
+
   tf.logging.set_verbosity(tf.logging.INFO)
   FLAGS, unparsed = parser.parse_known_args()
   # Using the Winograd non-fused algorithms provides a small performance boost.
@@ -118,7 +127,10 @@ def humony(url):
       res = Image.fromarray(res)
       res.save(path_to_output)
       print("generating:", path_to_output)
-  return (path_to_output)
+  if option == 1:
+    return (path_to_mask)
+  elif option == 2:
+    return (path_to_output)
 
 #
 # if __name__ == '__main__':
