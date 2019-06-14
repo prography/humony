@@ -1,58 +1,29 @@
 from django.shortcuts import render
-from rest_framework import generics
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.reverse import reverse
-#from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-#from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from .models import InPic, OutPic, SegPic
-from .serializers import InPicSerializer, OutPicSerializer, SegPicSerializer
 from deep.humony_inference_url import *
-# from config.settings import MEDIA_URL
+from rest_framework.views import APIView
 
-@api_view(['POST'])
-def InPicCreate(request):
-    iserializer = InPicSerializer(data=request.data)
-    if iserializer.is_valid():
-        iserializer.save()
-        Image = iserializer.data.get('before')
-        id = iserializer.data.get('guidmodel_ptr_id')
-        cutimage = humony("{0}{1}".format('http://127.0.0.1:8000', Image), 1)
-
-
-        SegPic(ing=cutimage[2:], origin_id_id=id).save()
-        print("\n" + cutimage[2:] + "이거다 \n")
-        segserializer = SegPicSerializer(data = {'ing':cutimage[2:], 'origin_id':id,})
-        segserializer.is_valid()
-        print(segserializer.data)
-        return Response(segserializer.data, status=201)
-    return Response(iserializer.errors, status=400)
+class inpic(APIView):
+    def post(self, request, format=None):
+        i = InPic.objects.create(before = self.request.data["before"])
+        cutimage = humony_segment(str("{0}{1}".format('http://127.0.0.1:8000/', i.before)))
+        s = SegPic.objects.create(in_id = i ,ing = cutimage[1], color_list=cutimage[2])
+        response_data= "{       "+  "'before':"+ str("'{0}{1}'".format('http://127.0.0.1:8000/', i.before)) +",         "+"'ing':"+ str("'{0}{1}'".format('http://127.0.0.1:8000/', s.ing)) + ",            " + "'color_list':"+ str(s.color_list) +"             }"
+        return Response(response_data, status=201)
 
 
-class InPicList(generics.ListCreateAPIView):
-    #authentication_classes = (SessionAuthentication, BasicAuthentication)
-   # permission_classes = (IsAuthenticated,)
-    queryset = InPic.objects.all()
-    serializer_class = InPicSerializer
 
-
-class InPicDetail(generics.RetrieveUpdateDestroyAPIView):
-    #authentication_classes = (SessionAuthentication, BasicAuthentication)
-    #permission_classes = (IsAuthenticated,)
-    queryset = InPic.objects.all()
-    serializer_class = InPicSerializer
-
-class OutPicList(generics.ListCreateAPIView):
-    #authentication_classes = (SessionAuthentication, BasicAuthentication)
-   # permission_classes = (IsAuthenticated,)
-    queryset = OutPic.objects.all()
-    serializer_class =OutPicSerializer
-
-
-class OutPicDetail(generics.RetrieveUpdateDestroyAPIView):
-    #authentication_classes = (SessionAuthentication, BasicAuthentication)
-    #permission_classes = (IsAuthenticated,)
-    queryset = OutPic.objects.all()
-    serializer_class = OutPicSerializer
-
+class outpic(APIView):
+    def post(self, request, format=None):
+        i = self.request.data["before"]
+        s = self.request.data["ing"]
+        cl = self.request.data["color_list"]
+        cs = self.request.data["color_sel"]        
+        r = humony_selcut(i, s, cl, cs)
+        OutPic(after=r, origin_id_id=id).save()
+        response_data=""
+        for key,value in r.items():
+            response_data+= "{       "+  "'after':"+ r.append(value) +"       }"
+        return Response(response_data, status=201)
