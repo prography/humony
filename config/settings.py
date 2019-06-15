@@ -21,6 +21,7 @@ if DEBUG is True:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+    SERVERURL="http://127.0.0.1:8000/"
 
 else:
     SETTING_PRD_DIC = get_server_info_value("deployment")
@@ -70,7 +71,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -130,23 +131,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-
-REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.AllowAny',
-    # ],
-    # #  'DEFAULT_PERMISSION_CLASSES': (
-    # #      'rest_framework.permissions.IsAuthenticated',
-    # # ),
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #   #  'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    #     'rest_framework.authentication.SessionAuthentication',
-    #     'rest_framework.authentication.BasicAuthentication',
-    # ),
-    # 'DEFAULT_PAGINATION_CLASS':
-    # 'rest_framework.pagination.LimitOffsetPagination',
-    # 'PAGE_SIZE': 10,
-}
 
 
 AUTHENTICATION_BACKENDS = [

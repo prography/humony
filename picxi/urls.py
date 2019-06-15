@@ -18,5 +18,5 @@ from django.urls import path
 
 urlpatterns = [
     path('inpic/', views.inpic.as_view()),
-    # path('outpic/', views.OutPicCreate),
+    path('outpic/', views.outpic.as_view()),
 ]

@@ -158,6 +158,9 @@ def humony_selcut(image_path, mask_path, color_list, col_sel_list): # mask에서
     output_path = FLAGS.cutout_dir + '/' + output_filename
     res.save(output_path)
 
+    return output_path
+
+
 
 # if __name__ == '__main__':
 #   tf.logging.set_verbosity(tf.logging.INFO)
