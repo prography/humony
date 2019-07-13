@@ -5,6 +5,7 @@ from .models import InPic, OutPic, SegPic
 from deep.humony_inference_url import *
 from rest_framework.views import APIView
 from config.settings import SERVERURL
+from django.http import JsonResponse
 class inpic(APIView):
     def post(self, request, format=None):
         i = InPic.objects.create(before = self.request.data["before"])
@@ -22,9 +23,11 @@ class inpic(APIView):
 class outpic(APIView):
     def post(self, request, format=None):
         i = self.request.data["before"]
-        i = i[:len(SERVERURL)]
+        i = i[len(SERVERURL):] 
+        i = "../"+i
         s = self.request.data["ing"]
-        s = s[:len(SERVERURL)]
+        s = s[len(SERVERURL):]
+        s = "../"+s
         cl = self.request.data["color_list"]
         cs = self.request.data["color_sel"]        
         print(i,s, cl, cs)
