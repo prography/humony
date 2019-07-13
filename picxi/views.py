@@ -9,8 +9,12 @@ class inpic(APIView):
     def post(self, request, format=None):
         i = InPic.objects.create(before = self.request.data["before"])
         cutimage = humony_segment(str("{0}{1}".format(SERVERURL, i.before)))
-        s = SegPic.objects.create(in_id = i ,ing = cutimage[1], color_list=cutimage[2])
-        response_data= "{\\r\\n       "+  "'before':"+ str("'{0}{1}'".format(SERVERURL, i.before)) +",\\r\\n         "+"'ing':"+ str("'{0}{1}'".format('http://127.0.0.1:8000/', s.ing)) + ",\\r\\n            " + "'color_list':"+ str(s.color_list) +"\\r\\n             }"
+        s = SegPic.objects.create(in_id = i ,ing = cutimage[1][1:], color_list=cutimage[2])
+        response_data= "{ \
+                   "+  "'before':"+ str("'{0}{1}'".format(SERVERURL, i.before)) +",\
+                   "+"'ing':"+ str("'{0}{1}'".format('http://127.0.0.1:8000', s.ing)) + \
+                   ",           " + "'color_list':"+ str(s.color_list) +"\n            \
+                    }"
         return Response(response_data, status=201)
 
 
@@ -23,7 +27,9 @@ class outpic(APIView):
         s = s[:len(SERVERURL)]
         cl = self.request.data["color_list"]
         cs = self.request.data["color_sel"]        
-        r = humony_selcut(i, s, cl, cs)
+        print(i,s, cl, cs)
+        r = humony_selcut(i, s, list(map(str, cl)),list(map(int,cs)))
         OutPic(after=r, origin_id_id=id).save()
+        response_data="asd"
         response_data = "{   \r    "+  "'after':"+ r.after +"   \n    }"
         return Response(response_data, status=201)

@@ -136,7 +136,7 @@ def humony_selcut(image_path, mask_path, color_list, col_sel_list): # mask에서
     img = cv2.imread(image_path)
     mask = cv2.imread(mask_path)
     mask_list = mask.tolist()
-
+#해당 경로에 이미지가 없는 경우 
     sel_mask = mask
 
     for i in range(mask.shape[0]):
