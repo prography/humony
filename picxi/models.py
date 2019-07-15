@@ -7,7 +7,6 @@ class InPic(GUIDModel):
     created = models.DateTimeField(auto_now_add=True)
 
 class SegPic(GUIDModel):
-    in_id = models.ForeignKey(InPic, on_delete=models.CASCADE, blank=True, null=True, related_name="in_id")
     ing = models.ImageField(upload_to='dataset/segpic/%Y/%m/%d/', blank=True, null=True)
     color_list = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)

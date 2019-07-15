@@ -103,7 +103,7 @@ def humony_segment(url): # url을 넣으면 ./dataset/segmentation_output/ 에 s
 
     image_basename = os.path.splitext(image_filename)[0]
     mask_filename = image_basename + '_seg.png'
-    mask_path = segout_dir + '/' + mask_filename
+    mask_path = segout_dir +  mask_filename
 #    output_filename = image_basename + '_cut.png'
 #    output_path = os.path.join(cutout_dir, output_filename)
 
@@ -132,6 +132,9 @@ def humony_segment(url): # url을 넣으면 ./dataset/segmentation_output/ 에 s
     return seg_data
 
 def humony_selcut(image_path, mask_path, color_list, col_sel_list): # mask에서 원하는 color에 해당하는 부분만 image에서 추출해서 잘라줌
+    tf.logging.set_verbosity(tf.logging.INFO)
+    FLAGS, unparsed = parser.parse_known_args()
+    os.environ['TF_ENABLE_WINOGRAD_NONFUSED'] = '1'
 
     img = cv2.imread(image_path)
     mask = cv2.imread(mask_path)
@@ -155,7 +158,7 @@ def humony_selcut(image_path, mask_path, color_list, col_sel_list): # mask에서
     image_filename = originNames[len(originNames) - 1]
     image_basename = os.path.splitext(image_filename)[0]
     output_filename = image_basename + '_cut.png'
-    output_path = FLAGS.cutout_dir + '/' + output_filename
+    output_path = FLAGS.cutout_dir + output_filename
     res.save(output_path)
 
     return output_path
