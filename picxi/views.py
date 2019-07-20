@@ -30,6 +30,6 @@ class outpic(APIView):
         cs = self.request.data["color_sel"]        
         #print(i,s, cl, cs)
         r = humony_selcut(i, s, cl,list(map(int,cs)))
-        OutPic.objects.create(after = r)
+        OutPic.objects.create(after = r[2:])
         response_data = { 'after': str("{0}{1}".format(SERVERURL, r[2:])) }
         return JsonResponse(response_data)
