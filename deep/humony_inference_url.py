@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
+import encodings
 import argparse
 import os
 import sys
@@ -19,6 +19,8 @@ import matplotlib.pyplot as plt
 import cv2
 import urllib.request
 from io import BytesIO
+from urllib import parse
+import numpy as np
 
 from tensorflow.python import debug as tf_debug
 import datetime
@@ -73,9 +75,9 @@ def humony_segment(url): # url을 넣으면 ./dataset/segmentation_output/ 에 s
 
     originNames = url.split("/")
     image_filename = originNames[len(originNames) - 1]
-    image_path = infer_data_dir + '/' + image_filename
+    image_path = infer_data_dir + image_filename
 
-    urllib.request.urlretrieve(url, image_path)
+    urllib.request.urlretrieve(url, image_path.encode('utf-8'))
 
     model = tf.estimator.Estimator(
         model_fn= deeplabv3_model_fn,
@@ -141,11 +143,19 @@ def humony_selcut(image_path, mask_path, color_list, col_sel_list): # mask에서
     mask_list = mask.tolist()
 #해당 경로에 이미지가 없는 경우 
     sel_mask = mask
+    
+    print('color_list: ', color_list, 'col_sel_list: ', col_sel_list)
 
     for i in range(mask.shape[0]):
         for j in range(mask.shape[1]):
             sel_mask[i][j] = [0, 0, 0]
+
             for col_index in col_sel_list:
+                # print(color_list[col_index]) 
+                print('col_index: ', col_index, 'color_list[col_index]: ', color_list[int(col_index)], 'mask: ', mask_list[i][j])
+                #print('col_index: ', col_index, 'color_list: ', color_list, type(color_list), np.shape(color_list))
+
+                
                 if mask_list[i][j] == color_list[col_index]:
                     sel_mask[i][j] = mask_list[i][j]
 

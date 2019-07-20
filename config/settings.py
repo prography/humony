@@ -4,13 +4,13 @@ import pymysql
 pymysql.install_as_MySQLdb()
 
 
-DEBUG = True
+DEBUG = False
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # APPEND_SLASH=False
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
 
-if DEBUG is True:
+if DEBUG:
     SECRET_KEY = "buq*!eias((abkx11b6ab964cs7-at1gw%k^!oypi^1357f6@"
     ALLOWED_HOSTS = [
         "127.0.0.1", "*",
