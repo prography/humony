@@ -4,7 +4,7 @@ import pymysql
 pymysql.install_as_MySQLdb()
 
 
-DEBUG = False
+DEBUG = True
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # APPEND_SLASH=False
 CORS_ORIGIN_ALLOW_ALL = True
@@ -48,7 +48,7 @@ else:
         "127.0.0.1",
         '.compute.amazonaws.com'
     ]
-
+    
 
 # AUTH_USER_MODEL = 'account.User'
 INSTALLED_APPS = [
@@ -142,6 +142,7 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 
 # REST_AUTH_SERIALIZERS = {
 #     'USER_DETAILS_SERIALIZER': 'user.serializers.UserDetailsSerializer',

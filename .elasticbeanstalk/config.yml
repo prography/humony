@@ -1,0 +1,21 @@
+branch-defaults:
+  master:
+    environment: picxi-start
+environment-defaults:
+  picxi:
+    branch: null
+    repository: null
+global:
+  application_name: "\uCCAB \uBC88\uC9F8 Elastic Beanstalk \uC560\uD50C\uB9AC\uCF00\
+    \uC774\uC158"
+  default_ec2_keyname: picxi
+  default_platform: arn:aws:elasticbeanstalk:ap-northeast-2::platform/Python 3.6 running
+    on 64bit Amazon Linux/2.8.3
+  default_region: ap-northeast-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  sc: git
+  workspace_type: Application
